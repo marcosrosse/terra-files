@@ -1,9 +1,9 @@
 label = "production"
-k8s_version = "1.23"
+k8s_version = "1.25"
 region = "us-west"
 pools = [
   {
     type : "g6-standard-2"
-    count : 3
+    count : 1
   }
 ]
