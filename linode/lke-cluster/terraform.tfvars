@@ -1,5 +1,5 @@
 label = "production"
-k8s_version = "1.25"
+k8s_version = "1.26"
 region = "us-west"
 pools = [
   {
