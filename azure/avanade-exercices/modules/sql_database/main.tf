@@ -23,6 +23,6 @@ resource "azurerm_mssql_database" "sqlserver" {
   }
 
   tags = {
-    environment = "production"
+    environment = "Production"
   }
 }
