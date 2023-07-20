@@ -1,42 +1,25 @@
-# module "sql_server" {
-#   source  = "Azure/sql-server/azurerm"
-#   version = "4.6.0"
-
-#   resource_group_name = var.resource_group_name
-#   location            = var.location
-#   version             = "12.0"
-#   name                = "MySqlServer"
-#   administrator_login          = "sqladmin" # Substitua pelo nome de login desejado
-#   administrator_login_password = "Password123!" # Substitua pela senha desejada
-# }
-
-# module "sql_database" {
-#   source  = "Azure/sql-db/azurerm"
-#   version = "3.2.0"
-
-#   resource_group_name = var.resource_group_name
-#   location            = var.location
-#   server_name         = module.sql_server.name
-#   name                = "DotNetAppSqlDb_db"
-#   edition             = "Standard"
-#   collation           = "SQL_Latin1_General_CP1_CI_AS"
-#   backup {
-#     retention_days = 1095 # Retenção de backup por 3 anos (365 * 3)
-#   }
-# }
-
-resource "azurerm_mssql_server" "example" {
-  name                         = "mssqlserver"
-  resource_group_name          = azurerm_resource_group.example.name
-  location                     = azurerm_resource_group.example.location
+#TODO CHANGE SKU TO FREE TIER
+#TODO REMOVE PROVIDER
+resource "azurerm_mssql_server" "sqlserver" {
+  name                         = "sqlserver"
+  resource_group_name          = var.resource_group_name
+  location                     = var.location
   version                      = "12.0"
-  administrator_login          = "missadministrator"
-  administrator_login_password = "thisIsKat11"
-  minimum_tls_version          = "1.2"
+  administrator_login          = "4dm1n157r470r"
+  administrator_login_password = "4-v3ry-53cr37-p455w0rd"
+}
 
-  azuread_administrator {
-    login_username = "AzureAD Admin"
-    object_id      = "00000000-0000-0000-0000-000000000000"
+resource "azurerm_mssql_database" "sqlserver" {
+  name           = var.db_name
+  server_id      = azurerm_mssql_server.sqlserver.id
+  collation      = var.azurerm_mssql_database_collation
+  license_type   = "LicenseIncluded"
+  max_size_gb    = 4
+  read_scale     = true
+  sku_name       = var.azurerm_mssql_database_sku
+  zone_redundant = true
+  long_term_retention_policy {
+    yearly_retention = var.yearly_retention_value
   }
 
   tags = {

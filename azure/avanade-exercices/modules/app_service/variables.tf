@@ -1,3 +1,4 @@
+#TODO REVIEW THE VARIABLES VALUES
 variable "resource_group_name" {
   description = "Nome do grupo de recursos."
   default = "production"

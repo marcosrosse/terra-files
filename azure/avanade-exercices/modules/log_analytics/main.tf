@@ -1,10 +1,8 @@
-module "log_analytics" {
-  source  = "Azure/log-analytics/azurerm"
-  version = "1.0.1"
-
-  resource_group_name = var.resource_group_name
+#TODO CHANGE SKU TO FREE TIER
+resource "azurerm_log_analytics_workspace" "log_analytics" {
+  name                = var.log_analytics_name
   location            = var.location
-  workspace_name      = "MyLogAnalyticsWorkspace"
-  sku                 = "PerGB2018"
-  retention_in_days   = 365 # Substitua pelo período de retenção desejado
+  resource_group_name = azurerm_resource_group.log_analytics.name
+  sku                 = var.log_analytics_sku
+  retention_in_days   = var.log_analytics_retention_days
 }

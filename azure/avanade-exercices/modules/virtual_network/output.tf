@@ -1,4 +1,4 @@
 output "virtual_network_id" {
-  description = "ID da Virtual Network."
-  value       = azurerm_virtual_network.virtual_network.id
+  description = "Virtual Network ID."
+  value       = azurerm_virtual_network.vpc.id
 }

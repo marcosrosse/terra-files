@@ -1,3 +1,12 @@
+#TODO FIX ERROR WITH THE VARIABLES OF THE MODULES
+
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+    }
+  }
+}
 provider "azurerm" {
   features {}
 }
@@ -14,11 +23,11 @@ module "sql_database" {
   location            = var.location
 }
 
-module "traffic_manager" {
-  source  = "./modules/traffic_manager"
+module "front_door" {
+  source  = "./modules/front_door"
   resource_group_name = var.resource_group_name
   location            = var.location
-  app_service_endpoints = [module.app_service.default_site_hostname]
+  # app_service_endpoints = [module.app_service.default_site_hostname]
 }
 
 module "log_analytics" {
@@ -33,11 +42,11 @@ module "virtual_network" {
   location            = var.location
 }
 
-module "web_application_firewall" {
-  source  = "./modules/web_application_firewall"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-}
+# module "web_application_firewall" {
+#   source  = "./modules/web_application_firewall"
+#   resource_group_name = var.resource_group_name
+#   location            = var.location
+# }
 
 module "key_vault" {
   source  = "./modules/key_vault"
