@@ -1,31 +1,17 @@
 #TODO REVIEW THE VARIABLES VALUES
 variable "resource_group_name" {
-  description = "Nome do grupo de recursos."
+  description = "Resource group name."
   default = "production"
 }
 
 variable "location" {
-  description = "Região do Azure."
-  default = "eu-west"
+  description = "Azure Region."
+  default = "westeurope"
 }
 
 variable "db_name" {
   description = "Name of the Database."
   default = "DotNetAppSqlDb_db"
-}
-
-
-#TODO CHANGE THE LOGIN AND PASSWORD TO SECRET
-variable "administrator_login" {
-  description = "MSQL Administrator Login"
-  default = "4dm1n157r470r"
-}
-
-#TODO CHANGE THE LOGIN AND PASSWORD TO SECRET OR IMPLEMENT AN RANDOM PASSWORD
-#https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password
-variable "administrator_login_password" {
-  description = "MSQL Administrator Login Password"
-  default = "4-v3ry-53cr37-p455w0rd"
 }
 
 variable "azurerm_mssql_database_collation" {
@@ -36,6 +22,7 @@ variable "azurerm_mssql_database_collation" {
 variable "azurerm_mssql_database_sku" {
   description = "SKU of the database"
   default = "S0"
+
 }
 
 variable "yearly_retention_value" {

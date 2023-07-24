@@ -1,22 +1,22 @@
 #TODO REVIEW THE VARIABLES VALUES
 variable "resource_group_name" {
-  description = "Nome do grupo de recursos."
+  description = "Resource group name."
   default = "production"
 }
 
 variable "location" {
-  description = "Região do Azure."
-  default = "eu-west"
+  description = "Azure region."
+  default = "westeurope"
 }
 
 variable "appservice_name" {
   description = "App Service Plan Name"
-  default = "avanade_app_svc"
+  default = "avanade-app"
 }
 
 variable "appservice_sku_name" {
   description = "SKU Name"
-  default = "P1v2"
+  default = "F1"
 }
 
 variable "appservice_os_type" {
@@ -26,13 +26,14 @@ variable "appservice_os_type" {
 
 variable "appservice_worker_count" {
   description = "Quantity of workers"
-  default = 2
+  default = 1
 }
 
-variable "detailed_error_messages" {
-  default = true
-}
-
-variable "failed_request_tracing" {
-  default = true
+variable "front_door_sku_name" {
+  type    = string
+  default = "Standard_AzureFrontDoor"
+  validation {
+    condition     = contains(["Standard_AzureFrontDoor", "Premium_AzureFrontDoor"], var.front_door_sku_name)
+    error_message = "The SKU value must be Standard_AzureFrontDoor or Premium_AzureFrontDoor."
+  }
 }

@@ -14,6 +14,12 @@ provider "azurerm" {
   features {}
 }
 
+module "resource_groups" {
+  source  = "./modules/resource_groups"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+}
+
 module "app_service" {
   source  = "./modules/app_service"
   resource_group_name = var.resource_group_name
@@ -25,13 +31,6 @@ module "sql_database" {
   resource_group_name = var.resource_group_name
   location            = var.location
 }
-
-# module "front_door" {
-#   source  = "./modules/front_door"
-#   resource_group_name = var.resource_group_name
-#   location            = var.location
-#   # app_service_endpoints = [module.app_service.default_site_hostname]
-# }
 
 # module "log_analytics" {
 #   source  = "./modules/log_analytics"
